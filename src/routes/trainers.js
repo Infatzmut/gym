@@ -2,14 +2,16 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
-router.get('/add', (req, res)=> {
+router.get('/add', async (req, res)=> {
     //TODO: IMPROVE AND ADD QUERY DATABASE
+    await pool.query('insert into trainer set ?', [req.body])
     res.render('trainers/addTrainer')
 })
 
-router.get('/list',(req, res) => {
+router.get('/list',async (req, res) => {
     //TODO: IMPROVE AND ADD QUERY DATABASE
-    res.render('trainers/listTrainer')
+    const trainers = await pool.query('select * from trainers')
+    res.render('trainers/listTrainer', {trainers})
 })
 
 module.exports = router;

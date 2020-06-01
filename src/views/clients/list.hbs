@@ -1,0 +1,45 @@
+<div class="container p-4">
+    <h3>Lista Clientes</h3>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>NOMBRE</td>
+                    <td>APELLIDOS</td>
+                    <td>TELEFONO</td>
+                    <td>DIRECCION</td>
+                    <td>GENERO</td>
+                    <td>TIPO_MEMBRESIA</td>
+                    <td>Acciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each clients}}
+                <tr>
+                    <td>{{id_Nuevo}}</td>
+                    <td>{{nom_Nuev}}</td>
+                    <td>{{ape_Nuev}}</td>
+                    <td>{{telefono}}</td>
+                    <td>{{direccion}}</td>
+                    <td>{{sexo}}</td>
+                    <td>{{tipo_membresia}}</td>
+                    <td>
+                        {{!--TODO: IMPROVE--}}
+                        <a class="btn" href="edit/{{id_Nuevo}}">Editar</a>
+                        <a class="btn btn-danger" href="delete/{{id_Nuevo}}">Eliminar</a>
+                    </td>
+                </tr>
+                {{else}}
+                    <div class="col-md-4 mx-auto">
+                        <div class="card card-body text-center">
+                            <p>No hay usuarios registrados</p>
+                            <a href="/clients/add">Crear nuevo</a>
+                        </div>
+                    </div>
+                {{/each}}
+            </tbody>
+        </table>
+        
+    </div>
+</div>

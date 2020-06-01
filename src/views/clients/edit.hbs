@@ -1,28 +1,28 @@
 <div class="container">
-<form action="/clients/add" method="POST">
+<form action="/clients/edit/client.id" method="POST">
     <div class="form-group">
         <label for="codigo">Codigo</label>
-        <input type="text" class="form-control" name="id_Nuevo" id="codigo" required>
+        <input type="text" class="form-control" value= {{client.id_Nuevo}} name="id_Nuevo" id="codigo" required>
     </div>
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" name="nom_Nuev" id="nombre" required>
+    <input type="text" class="form-control" name="nom_Nuev" value={{client.nom_Nuev}} id="nombre" required>
   </div>
   <div class="form-group">
     <label for="apellido">Apellido</label>
-    <input type="text" class="form-control" name="ape_Nuev" id="apellido" required>
+    <input type="text" class="form-control" name="ape_Nuev" value = {{client.ape_Nuev}} id="apellido" required>
   </div>
   <div class="form-group">
     <label for="telefono">Telefono</label>
-    <input type="text" class="form-control" name="telefono" id="telefono">
+    <input type="text" class="form-control" name="telefono" value={{client.telefono}} id="telefono">
   </div>
   <div class="form-group">
     <label for="direccion">Direccion</label>
-    <input type="text" class="form-control" name="direccion" id="direccion" required>
+    <input type="text" class="form-control" name="direccion" value={{client.direccion}} id="direccion" required>
   </div>
   <div class="form-group">
     <label for="genero">Genero</label>
-    <select class="form-control" name="sexo" id="genero" required>
+    <select class="form-control" value={{client.sexo}} name="sexo" id="genero" required>
       <option value="">----Seleccione----</option>
       <option value="M">Masculino</option>
       <option value="F">Femenino</option>
