@@ -1,40 +1,49 @@
 <div class="container">
 <form action="/clients/add" method="POST">
-    <div class="form-group">
-        <label for="codigo">Codigo</label>
-        <input type="text" class="form-control" name="id_Nuevo" id="codigo" required>
-    </div>
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" name="nom_Nuev" id="nombre" required>
+    <input type="text" class="form-control" name="nombre" id="nombre" required>
   </div>
   <div class="form-group">
-    <label for="apellido">Apellido</label>
-    <input type="text" class="form-control" name="ape_Nuev" id="apellido" required>
+    <label for="apellido">Apellido Paterno</label>
+    <input type="text" class="form-control" name="apellidoP" id="ape_pat" required>
   </div>
   <div class="form-group">
-    <label for="telefono">Telefono</label>
-    <input type="text" class="form-control" name="telefono" id="telefono">
+    <label for="apellido">Apellido Materno</label>
+    <input type="text" class="form-control" name="apellidoM" id="ape_mat" required>
+  </div>
+  <div class="form-group">
+    <label for="fecha_nac">Fecha nacimiento</label>
+    <input type="date" class="form-control" name="fecha_nac" id="fecha" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" id="email">
+  </div>
+  <div class="form-group">
+    <label for="apellido">Tipo_Documento</label>
+    <select class="form-control" name="tipoDocumento" id="doc_type" required>
+      <option value="">----Seleccione----</option>
+      {{#each tipoDocumento}}
+      <option value={{id}}>{{descripcion}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="apellido">Documento</label>
+    <input type="text" class="form-control" name="documentoId" id="documento" required>
   </div>
   <div class="form-group">
     <label for="direccion">Direccion</label>
     <input type="text" class="form-control" name="direccion" id="direccion" required>
   </div>
   <div class="form-group">
-    <label for="genero">Genero</label>
-    <select class="form-control" name="sexo" id="genero" required>
+    <label for="membresia">Tipo Membresia</label>
+    <select class="form-control" name="tipoMembresiaId" id="membresia">
       <option value="">----Seleccione----</option>
-      <option value="M">Masculino</option>
-      <option value="F">Femenino</option>
-      <option value="O">Otro</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="genero">Tipo Membresia</label>
-    <select class="form-control" name="tipo_membresia" id="membresia">
-      <option value="">----Seleccione----</option>
-      <option value="VIP">VIP</option>
-      <option value="ESTANDAR">ESTANDAR</option>
+      {{#each tipoMembresia}}
+      <option value={{id}}>{{descripcion}}</option>
+      {{/each}}
     </select>
   </div>
   <div class="form-group">

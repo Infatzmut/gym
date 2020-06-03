@@ -3,7 +3,8 @@ const exphbs = require('express-handlebars')
 const path = require('path');
 const app = express();
 const morgan = require('morgan');
-const flash = require('connect-flash')
+const flash = require('connect-flash');
+const session = require('express-session');
 // Settings
 app.set('port', process.env.PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +21,10 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
+app.use(session({ cookie: { maxAge: 60000 }, 
+    secret: 'woot',
+    resave: false, 
+    saveUninitialized: false}))
 app.use(flash());
 
 // Global variables
