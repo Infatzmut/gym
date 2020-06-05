@@ -15,17 +15,6 @@ DROP SCHEMA IF EXISTS `gimnasio` ;
 CREATE SCHEMA IF NOT EXISTS `gimnasio` DEFAULT CHARACTER SET utf8 ;
 USE `gimnasio` ;
 
--- -----------------------------------------------------
--- Table `gimnasio`.`estados`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `gimnasio`.`estados` ;
-
-CREATE TABLE IF NOT EXISTS `gimnasio`.`estados` (
-  `id_est` TINYINT(3) NOT NULL AUTO_INCREMENT,
-  `descripcion` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_est`),
-  UNIQUE INDEX `descripcion_UNIQUE` (`descripcion` ASC) VISIBLE)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -37,13 +26,8 @@ CREATE TABLE IF NOT EXISTS `gimnasio`.`sedes` (
   `id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `direccion` VARCHAR(50) NULL,
   `estadosid` TINYINT(3) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `FK_estado2_idx` (`estadosid` ASC) VISIBLE,
-  CONSTRAINT `FK_estado2`
-    FOREIGN KEY (`estadosid`)
-    REFERENCES `gimnasio`.`estados` (`id_est`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`)
+)
 ENGINE = InnoDB;
 
 
@@ -79,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `gimnasio`.`entrenadores` (
   UNIQUE INDEX `documentId_UNIQUE` (`documentoId` ASC) VISIBLE,
   INDEX `FK_Sedes2_idx` (`idSede` ASC) VISIBLE,
   INDEX `FK_TipoDoc2_idx` (`tipoDocumentoId` ASC) VISIBLE,
-  INDEX `FK_Estado3_idx` (`idEstado` ASC) VISIBLE,
   CONSTRAINT `FK_Sedes2`
     FOREIGN KEY (`idSede`)
     REFERENCES `gimnasio`.`sedes` (`id`)
@@ -89,12 +72,8 @@ CREATE TABLE IF NOT EXISTS `gimnasio`.`entrenadores` (
     FOREIGN KEY (`tipoDocumentoId`)
     REFERENCES `gimnasio`.`tipo_documento` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK_Estado3`
-    FOREIGN KEY (`idEstado`)
-    REFERENCES `gimnasio`.`estados` (`id_est`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+  )
 ENGINE = InnoDB;
 
 
@@ -134,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `gimnasio`.`clientes` (
   INDEX `FK_Membresia_idx` (`tipoMembresiaId` ASC) VISIBLE,
   INDEX `FK_Sedes1_idx` (`idSede` ASC) VISIBLE,
   INDEX `FK_TipoDoc1_idx` (`tipoDocumento` ASC) VISIBLE,
-  INDEX `FK_Estado_idx` (`estadoId` ASC) VISIBLE,
   CONSTRAINT `FK_Membresia1`
     FOREIGN KEY (`tipoMembresiaId`)
     REFERENCES `gimnasio`.`tipo_membresia` (`id`)
@@ -149,12 +127,8 @@ CREATE TABLE IF NOT EXISTS `gimnasio`.`clientes` (
     FOREIGN KEY (`tipoDocumento`)
     REFERENCES `gimnasio`.`tipo_documento` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK_Estado`
-    FOREIGN KEY (`estadoId`)
-    REFERENCES `gimnasio`.`estados` (`id_est`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+  )
 ENGINE = InnoDB;
 
 
@@ -259,3 +233,21 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+use gimnasio;
+--modifications 'cause had some mistakes on columns AI attribute;
+alter table horarios_entrenamiento modify id MEDIUMINT auto_increment;
+alter table tipo_entrenamiento modify descripcion varchar(255) not null; 
+
+-- Insert data
+insert into sedes(direccion, estadosid) values ('Av Peru 2020', 1);
+insert into tipo_documento(descripcion) values ('DNI'),('CARNET EXTRANJERIA'), ('PASAPORTE');
+insert into horarios(id, hora_inicio, hora_fin) values (1,'06:00','07:00'), (2,'07:00','08:00'), (3,'08:00','09:00'), (4,'09:00','10:00');
+insert into horarios(id, hora_inicio, hora_fin) values (5,'18:00','19:00'), (6,'19:00','20:00'), (7,'20:00','21:00'), (8,'21:00','22:00');
+insert into salones(nombre, sedeId) values ('salon 1','1'), ('salon 2','1');
+insert into tipo_entrenamiento(nombre, descripcion) values ('funcional','Entrenamiento de alta exigencia que combina el peso corporal y pesas'), 
+															('fullbody', 'Baile realizado con un cierto grado de exigencia escencial para quemar grasa'),
+                                                            ('MMA', 'Arte marcial que todas las partes del cuerpo son tus instrumentos');
+                                                                                                                       
+insert into horarios_entrenamiento(idHorario, idEntrenamiento, idSalon) values(1, 3, 2), (5, 3, 2), (2, 1, 1), (5, 2, 1), (8, 2, 1);                                                            
+insert into tipo_membresia(id, descripcion) values (1, 'VIP'), (2, 'ESTANDAR');
