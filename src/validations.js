@@ -50,6 +50,8 @@ const validateBirthdate = (birthdate, err) =>{
   }
 
   const validateDocument = (docType, docID , err) => {
+    console.log(docType);
+    console.log(docID);
     const dniRegex = /^[0-9]{1,8}$/;
     const passportRegex = /^([a-zA-Z0-9]){1,12}$/;
     const foreignCardRegex = /^([a-zA-Z0-9]){1,12}$/;

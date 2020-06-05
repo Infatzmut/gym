@@ -35,9 +35,8 @@ router.post('/add',async (req,res) => {
 })
 
 router.get('/', async (req,res) => {
-    const clients = await pool.query(`SELECT c.id, c.nombre, c.apellidoP, c.apellidoM, c.email, es.descripcion as estado,m.descripcion as membresia
-                                         FROM clientes c
-                                         INNER JOIN estados es on c.estadoId = es.id_est 
+    const clients = await pool.query(`SELECT c.id, c.nombre, c.apellidoP, c.apellidoM, c.email,m.descripcion as membresia
+                                         FROM clientes c 
                                          INNER JOIN tipo_membresia m on m.id = c.tipoMembresiaId
                                          where c.estadoId = 1`);
     console.log(clients)
