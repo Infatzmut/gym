@@ -18,7 +18,7 @@ const validateLastName = (lastName, err) => {
 
 const validateSecondLastName = (sLastName, err) => {
     const secondLastNameRegex = /^[a-zA-ZñÑ'\s]{1,25}$/;
-    if(!secondLastNameRegex.test(sLastName)){
+    if(sLastName && !secondLastNameRegex.test(sLastName)){
         err.push("Formato de apellido Materno invalido")
     }
 }
@@ -50,28 +50,27 @@ const validateBirthdate = (birthdate, err) =>{
   }
 
   const validateDocument = (docType, docID , err) => {
-    console.log(docType);
-    console.log(docID);
     const dniRegex = /^[0-9]{1,8}$/;
     const passportRegex = /^([a-zA-Z0-9]){1,12}$/;
     const foreignCardRegex = /^([a-zA-Z0-9]){1,12}$/;
     if(!docType){
         err.push("Debe seleccionar un tipo de documento");
-    } else if(![1,2,3].includes(docType)){
+    } else if(![1,2,3].includes(Number(docType))){
         err.push("Documento invalido");
-    } else if(docType === 1 && !dniRegex.test(docID)){
+    } else if(docType === '1' && !dniRegex.test(docID)){
         err.push("Formato DNI invalido");
-    }  else if(docType === 2 && !foreignCardRegex.test(docID)){
+    }  else if(docType === '2' && !foreignCardRegex.test(docID)){
         err.push("Formato Carnet de extrangería invalido")
-    }else if(docType === 3 && !passportRegex.test(docID)) {
+    }else if(docType === '3' && !passportRegex.test(docID)) {
         err.push("Formato Pasaporte invalido")
     } 
   }
 
   const validateAccess = (AccessType, err) => {
+    console.log(AccessType);
     if(!AccessType) {
-        err.push("Ingrese genero")
-    } else if(![1,2].includes(AccessType)) {
+        err.push("Ingrese Membresia")
+    } else if(![1,2].includes(Number(AccessType))) {
         err.push("Membresia invalida")
     }
   }
@@ -92,7 +91,7 @@ const validateBirthdate = (birthdate, err) =>{
     validateEmail(user.email, err);
     validateDocument(user.tipoDocumento, user.documentoId, err);
     validateAccess(user.tipoMembresiaId, err);
-    validateAddress(user.direccion, err);
+    //validateAddress(user.direccion, err);
   }
 
 module.exports = {

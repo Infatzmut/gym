@@ -10,7 +10,7 @@
   </div>
   <div class="form-group">
     <label for="apellido">Apellido Materno</label>
-    <input type="text" class="form-control" name="apellidoM" id="ape_mat" required>
+    <input type="text" class="form-control" name="apellidoM" id="ape_mat" >
   </div>
   <div class="form-group">
     <label for="fecha_nac">Fecha nacimiento</label>
@@ -18,7 +18,7 @@
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" id="email">
+    <input type="email" class="form-control" name="email" id="email" required>
   </div>
   <div class="form-group">
     <label for="apellido">Tipo_Documento</label>
@@ -39,7 +39,7 @@
   </div>
   <div class="form-group">
     <label for="membresia">Tipo Membresia</label>
-    <select class="form-control" name="tipoMembresiaId" id="membresia">
+    <select class="form-control" name="tipoMembresiaId" id="membresia" required>
       <option value="">----Seleccione----</option>
       {{#each tipoMembresia}}
       <option value={{id}}>{{descripcion}}</option>
@@ -48,7 +48,7 @@
   </div>
   <div class="form-group">
     <button class="btn btn-primary">Agregar</button>
-    <button class="btn btn-danger">Cancelar</button>
+    <a class="btn btn-danger" href="/clients/">Cancelar</a>
   </div>
 </form>
 </div>

@@ -30,7 +30,7 @@ app.use(flash());
 // Global variables
 app.use((req, res, next) => {
     app.locals.success = req.flash('success');
-    app.locals.error = req.flash('error');
+    app.locals.errors = req.flash('errors');
     next();
 })
 // Routes
