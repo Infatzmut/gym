@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database')
+const validator = require('../validations');
 
 router.get('/add', async (req, res) => {
     const tipoDocumento = await pool.query('select * from tipo_documento');
@@ -9,14 +10,28 @@ router.get('/add', async (req, res) => {
 });
 
 router.post('/add',async (req,res) => {
-    const newClient = {
-        ...req.body,
-        idSede:1,
-        estadoId:1
+    const errors = []
+    try{
+        const newClient = {
+            ...req.body,
+            idSede:1,
+            estadoId:1
+        }
+        validator.createUser(newClient, errors);
+        if(errors.length > 0) {
+            console.error(errors);
+            req.flash('success',errors.join('\n'));
+            res.redirect('/clients/add')
+            return;
+            //res.sendStatus(404).json(errors.join('\n'));
+        }
+        await pool.query('INSERT INTO clientes set ?' , [newClient]);
+        req.flash('success', 'cliente agregado correctamente')
+        res.redirect('/clients/add');    
+    }catch(error){
+       console.log(error);
+       res.send(500).json("Server Error");
     }
-    await pool.query('INSERT INTO clientes set ?' , [newClient])
-    req.flash('success', 'cliente agregado correctamente')
-    res.redirect('/clients');   
 })
 
 router.get('/', async (req,res) => {
@@ -35,18 +50,26 @@ router.get('/edit/:id', async(req, res) => {
     const client = await pool.query('select * from clientes where id=?', [id]);
     const tipoDocumento = await pool.query('select * from tipo_documento');
     const tipoMembresia = await pool.query('select * from tipo_membresia');
-    console.log(client[0]);
-    res.render('clients/edit', {client :client[0],tipoDocumento,tipoMembresia})
+    const data = {
+        client: client[0],
+        tipoDocumento,
+        tipoMembresia
+    }
+    res.render('clients/edit',data)
 })
 
 
 router.get('/delete/:id', async (req, res) => {
     const {id} = req.params;
-    await pool.query("update from set estadoId = ? clientes where id = ?", [2, id])
-    req.flash('success', 'cliente eliminado correctamente')
-    res.redirect('/');
+    try{
+        await pool.query("update clientes set estadoId = ? where id = ?", [2, id])
+        req.flash('success', 'cliente eliminado correctamente');
+        res.redirect('/clients');
+    }catch (error){
+        req.flash('error', error);
+        console.log(error);
+    } 
 });
-
 
 
 router.post('/edit/:id', async (req,res)=> {
