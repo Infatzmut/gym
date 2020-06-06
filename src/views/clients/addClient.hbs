@@ -12,8 +12,13 @@
     <input type="text" class="form-control" name="apellidoP" id="ape_pat" placeholder="Escriba su apellido paterno" minlength="3" maxlength="20" required pattern="[A-Za-z]+">
   </div>
   <div class="form-group">
+<<<<<<< HEAD
     <label for="apellido2">Apellido Materno</label>
     <input type="text" class="form-control" name="apellidoM" id="ape_mat" placeholder="Escriba su apellido materno" minlength="3" maxlength="20" required pattern="[A-Za-z]+">
+=======
+    <label for="apellido">Apellido Materno</label>
+    <input type="text" class="form-control" name="apellidoM" id="ape_mat" >
+>>>>>>> cfa7d0109001c03303b85e657035d6df2931e7eb
   </div>
   <div class="form-group">
     <label for="fecha_nac">Fecha nacimiento</label>
@@ -21,7 +26,11 @@
   </div>
   <div class="form-group">
     <label for="email">Email</label>
+<<<<<<< HEAD
     <input type="email" class="form-control" name="email" id="email" placeholder="Escriba un correo válido" minlength="3" maxlength="20" required>
+=======
+    <input type="email" class="form-control" name="email" id="email" required>
+>>>>>>> cfa7d0109001c03303b85e657035d6df2931e7eb
   </div>
   <div class="form-group">
     <label for="tipodocumento">Tipo_Documento</label>
@@ -43,7 +52,7 @@
   </div>
   <div class="form-group">
     <label for="membresia">Tipo Membresia</label>
-    <select class="form-control" name="tipoMembresiaId" id="membresia">
+    <select class="form-control" name="tipoMembresiaId" id="membresia" required>
       <option value="">----Seleccione----</option>
       {{#each tipoMembresia}}
       <option value={{id}}>{{descripcion}}</option>
@@ -52,7 +61,7 @@
   </div>
   <div class="form-group">
     <button class="btn btn-primary">Agregar</button>
-    <button class="btn btn-danger">Cancelar</button>
+    <a class="btn btn-danger" href="/clients/">Cancelar</a>
   </div>
 </form>
 </div>
