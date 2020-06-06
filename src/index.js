@@ -21,9 +21,9 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
-app.use(session({ cookie: { maxAge: 60000 }, 
+app.use(session({ cookie: { maxAge: 60000 },
     secret: 'woot',
-    resave: false, 
+    resave: false,
     saveUninitialized: false}))
 app.use(flash());
 
@@ -38,10 +38,10 @@ app.use(require('./routes'))
 //app.use(require('./routes/authentication'));
 
 
-// Public 
+// Public
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Starting the server 
+// Starting the server
 app.listen(app.get('port'), ()=> {
     console.log("Server running on port: "+app.get('port'));
 })

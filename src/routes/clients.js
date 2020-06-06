@@ -12,31 +12,31 @@ router.get('/add', async (req, res) => {
 router.post('/add',async (req,res) => {
     const errors = []
     try{
-        
+
         const newClient = {
             ...req.body,
             idSede:1,
             estadoId:1
         }
-        /*validator.createUser(newClient, errors);
+        validator.createUser(newClient, errors);
         if(errors.length > 0) {
             console.error(errors);
             req.flash('errors',errors.join('\n'));
             res.redirect('/clients/add')
             return;
             //res.sendStatus(404).json(errors.join('\n'));
-<<<<<<< HEAD
-        }*/
-=======
+
         }
+
+
         const documentExistent = await pool.query('select documentoId, estadoId from clientes where documentoId = ?', [req.body.documentoId]);
         if(documentExistent.length>0){
             if(documentExistent[0] == req.body.documentId){
                 req.flash('errors', 'Documento Existente');
                 return;
-            }   
+            }
         }
->>>>>>> cfa7d0109001c03303b85e657035d6df2931e7eb
+
         await pool.query('INSERT INTO clientes set ?' , [newClient]);
         req.flash('success', 'cliente agregado correctamente')
         res.redirect('/clients/add');
@@ -47,13 +47,8 @@ router.post('/add',async (req,res) => {
 })
 
 router.get('/', async (req,res) => {
-<<<<<<< HEAD
-    const clients = await pool.query(`SELECT c.id, c.nombre, c.apellidoP, c.apellidoM, c.email, m.descripcion as membresia
-                                         FROM clientes c
-=======
     const clients = await pool.query(`SELECT c.id, c.nombre, c.apellidoP, c.apellidoM, c.email,m.descripcion as membresia
-                                         FROM clientes c 
->>>>>>> cfa7d0109001c03303b85e657035d6df2931e7eb
+                                         FROM clientes c
                                          INNER JOIN tipo_membresia m on m.id = c.tipoMembresiaId
                                          where c.estadoId = 1`);
     res.render('clients/list', {clients});
