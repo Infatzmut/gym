@@ -17,17 +17,17 @@ router.post('/add',async (req,res) => {
             idSede:1,
             estadoId:1
         }
-        validator.createUser(newClient, errors);
+        /*validator.createUser(newClient, errors);
         if(errors.length > 0) {
             console.error(errors);
             req.flash('success',errors.join('\n'));
             res.redirect('/clients/add')
             return;
             //res.sendStatus(404).json(errors.join('\n'));
-        }
+        }*/
         await pool.query('INSERT INTO clientes set ?' , [newClient]);
         req.flash('success', 'cliente agregado correctamente')
-        res.redirect('/clients/add');    
+        res.redirect('/clients/add');
     }catch(error){
        console.log(error);
        res.send(500).json("Server Error");
@@ -35,9 +35,8 @@ router.post('/add',async (req,res) => {
 })
 
 router.get('/', async (req,res) => {
-    const clients = await pool.query(`SELECT c.id, c.nombre, c.apellidoP, c.apellidoM, c.email, es.descripcion as estado,m.descripcion as membresia
+    const clients = await pool.query(`SELECT c.id, c.nombre, c.apellidoP, c.apellidoM, c.email, m.descripcion as membresia
                                          FROM clientes c
-                                         INNER JOIN estados es on c.estadoId = es.id_est 
                                          INNER JOIN tipo_membresia m on m.id = c.tipoMembresiaId
                                          where c.estadoId = 1`);
     console.log(clients)
@@ -68,7 +67,7 @@ router.get('/delete/:id', async (req, res) => {
     }catch (error){
         req.flash('error', error);
         console.log(error);
-    } 
+    }
 });
 
 

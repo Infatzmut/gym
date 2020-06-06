@@ -1,27 +1,30 @@
 <div class="container">
 <form action="/clients/add" method="POST">
   <div class="form-group">
-    <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" name="nombre" id="nombre" required>
+
+
+    <label for="nombre">Nombres</label>
+    <input type="text" class="form-control"  name="nombre" id="nombre" placeholder="Escriba su nombre" minlength="3" maxlength="20" required pattern="[A-Za-z]+" autofocus>
+
   </div>
   <div class="form-group">
     <label for="apellido">Apellido Paterno</label>
-    <input type="text" class="form-control" name="apellidoP" id="ape_pat" required>
+    <input type="text" class="form-control" name="apellidoP" id="ape_pat" placeholder="Escriba su apellido paterno" minlength="3" maxlength="20" required pattern="[A-Za-z]+">
   </div>
   <div class="form-group">
-    <label for="apellido">Apellido Materno</label>
-    <input type="text" class="form-control" name="apellidoM" id="ape_mat" required>
+    <label for="apellido2">Apellido Materno</label>
+    <input type="text" class="form-control" name="apellidoM" id="ape_mat" placeholder="Escriba su apellido materno" minlength="3" maxlength="20" required pattern="[A-Za-z]+">
   </div>
   <div class="form-group">
     <label for="fecha_nac">Fecha nacimiento</label>
-    <input type="date" class="form-control" name="fecha_nac" id="fecha" required>
+    <input type="date" class="form-control"  name="fecha_nac" id="fecha"  min="1950-01-01" max="2003-01-01" required>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" id="email">
+    <input type="email" class="form-control" name="email" id="email" placeholder="Escriba un correo válido" minlength="3" maxlength="20" required>
   </div>
   <div class="form-group">
-    <label for="apellido">Tipo_Documento</label>
+    <label for="tipodocumento">Tipo_Documento</label>
     <select class="form-control" name="tipoDocumento" id="doc_type" required>
       <option value="">----Seleccione----</option>
       {{#each tipoDocumento}}
@@ -30,12 +33,13 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="apellido">Documento</label>
-    <input type="text" class="form-control" name="documentoId" id="documento" required>
+    <label for="numdocumento">Documento</label>
+    <input type="number" class="form-control" name="documentoId" id="documento" placeholder="Escriba su documento" min="8" required>
+
   </div>
   <div class="form-group">
     <label for="direccion">Direccion</label>
-    <input type="text" class="form-control" name="direccion" id="direccion" required>
+    <input type="text" class="form-control" name="direccion" id="direccion" maxlength="30"  required pattern="[A-Za-z0-9]+" >
   </div>
   <div class="form-group">
     <label for="membresia">Tipo Membresia</label>
@@ -52,3 +56,16 @@
   </div>
 </form>
 </div>
+
+<script>
+function validar(texto){
+
+	if (texto.length <2){ //si el texo es menor a 2
+		alert('el texto es muy corto');
+	}
+	else if (texto.length >8){ //si el texo es mayor a 8
+		alert('el texto es muy largo');
+	}
+
+}
+</script>
