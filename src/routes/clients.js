@@ -12,7 +12,6 @@ router.get('/add', async (req, res) => {
 router.post('/add',async (req,res) => {
     const errors = []
     try{
-
         const newClient = {
             ...req.body,
             idSede:1,
@@ -25,14 +24,20 @@ router.post('/add',async (req,res) => {
             res.redirect('/clients/add')
             return;
             //res.sendStatus(404).json(errors.join('\n'));
-
         }
 
-
         const documentExistent = await pool.query('select documentoId, estadoId from clientes where documentoId = ?', [req.body.documentoId]);
-        if(documentExistent.length>0){
-            if(documentExistent[0] == req.body.documentId){
+        if(documentExistent.length > 0){
+            if(documentExistent[0].documentoId == req.body.documentoId){
                 req.flash('errors', 'Documento Existente');
+                return;
+            }
+        }
+
+        const existentEmail = await pool.query('select email from clientes where email = ?', [req.body.email]);
+        if(existentEmail.length > 0) {
+            if(existentEmail[0].email == req.body.email) {
+                req.flash('errors', 'Email Existente');
                 return;
             }
         }

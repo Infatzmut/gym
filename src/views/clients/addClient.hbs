@@ -1,10 +1,8 @@
 <div class="container">
 <form action="/clients/add" method="POST">
   <div class="form-group">
-
-
     <label for="nombre">Nombres</label>
-    <input type="text" class="form-control"  name="nombre" id="nombre" placeholder="Escriba su nombre" minlength="3" maxlength="20" required pattern="[A-Za-z]+" autofocus>
+    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Escriba su nombre" minlength="3" maxlength="20" required pattern="[A-Za-z]+" autofocus>
 
   </div>
   <div class="form-group">
@@ -23,10 +21,7 @@
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-
     <input type="email" class="form-control" name="email" id="email" placeholder="Escriba un correo válido" minlength="8" maxlength="45" required>
-
-
   </div>
   <div class="form-group">
     <label for="tipodocumento">Tipo_Documento</label>
@@ -39,7 +34,7 @@
   </div>
   <div class="form-group">
     <label for="numdocumento">Documento</label>
-    <input type="number" class="form-control" name="documentoId" id="documento" placeholder="Escriba su documento" min="8" required>
+    <input type="text" class="form-control" name="documentoId" id="documento" placeholder="Escriba su documento" minlength="8" required>
 
   </div>
   <div class="form-group">
@@ -61,7 +56,9 @@
   </div>
 </form>
 </div>
-
+{{#if errors}}
+<scrip>alert(1)</scrip>
+{{/if}}
 <script>
 function validar(texto){
 

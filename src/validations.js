@@ -67,7 +67,6 @@ const validateBirthdate = (birthdate, err) =>{
   }
 
   const validateAccess = (AccessType, err) => {
-    console.log(AccessType);
     if(!AccessType) {
         err.push("Ingrese Membresia")
     } else if(![1,2].includes(Number(AccessType))) {
