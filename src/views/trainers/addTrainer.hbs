@@ -3,19 +3,19 @@
 <form>
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" id="nombre" required>
+    <input type="text" class="form-control" id="nombre" placeholder="Escriba su nombre" minlength="3" maxlength="20" required pattern="[A-Za-z ]+" autofocus>
   </div>
   <div class="form-group">
     <label for="nombre">Apellido</label>
-    <input type="text" class="form-control" id="apellido" required>
+    <input type="text" class="form-control" id="apellido" placeholder="Escriba su apellido paterno" minlength="3" maxlength="20" required pattern="[A-Za-z]+">
   </div>
   <div class="form-group">
     <label for="nombre">Telefono</label>
-    <input type="text" class="form-control" id="telefono">
+    <input type="text" class="form-control" id="telefono" placeholder="Escriba telefono" minlength="9" required>
   </div>
   <div class="form-group">
     <label for="nombre">Direccion</label>
-    <input type="text" class="form-control" id="direccion" required>
+    <input type="text" class="form-control" id="direccion" id="direccion" placeholder="Escriba su direccion" maxlength="35"  required pattern="[A-Za-z0-9 ]+">
   </div>
   <div class="form-group">
     <label for="genero">Genero</label>
@@ -27,11 +27,11 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="genero">Tipo Membresia</label>
+    <label for="genero">TIPO TRAINER</label>
     <select class="form-control" id="genero">
       <option>----Seleccione----</option>
-      <option>VIP</option>
-      <option>ESTANDAR</option>
+      <option>TIEMPO COMPLETO</option>
+      <option>TIEMPO PARCIAL</option>
     </select>
   </div>
   <div class="form-group">

@@ -5,6 +5,8 @@ const clients = require('./clients');
 const trainers = require('./trainers');
 const users = require('./users');
 
+
+
 router.use('/clients', clients);
 router.use('/trainers', trainers);
 //router.use('/users', users);
